@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Private Friends Chat</title>
+<style>
+body{font-family:Arial;padding:20px;max-width:700px;margin:auto}
+#chat{border:1px solid #ccc;height:300px;overflow:auto;padding:10px;margin:10px 0}
+input,button{padding:8px}
+</style>
+</head>
+<body>
+<h2>Private Friends Chat (Demo)</h2>
+<p>Password: 1234</p>
+<div id="login">
+<input type="password" id="pw" placeholder="Password">
+<button onclick="login()">Login</button>
+</div>
+<div id="app" style="display:none">
+<div id="chat"></div>
+<input id="msg" placeholder="Message">
+<button onclick="send()">Send</button>
+</div>
+<script>
+function login(){
+ if(document.getElementById('pw').value==='1234'){
+   document.getElementById('login').style.display='none';
+   document.getElementById('app').style.display='block';
+ }
+}
+function send(){
+ let m=document.getElementById('msg').value;
+ let c=document.getElementById('chat');
+ c.innerHTML += '<div>'+m+'</div>';
+ localStorage.setItem('demochat', c.innerHTML);
+ document.getElementById('msg').value='';
+}
+document.getElementById('chat').innerHTML=localStorage.getItem('demochat')||'';
+</script>
+</body>
+</html>
